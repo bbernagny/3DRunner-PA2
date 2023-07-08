@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Coin
+  - Obstacle
+  - End
+  - Speedboost
   layers:
   - Default
   - TransparentFX
