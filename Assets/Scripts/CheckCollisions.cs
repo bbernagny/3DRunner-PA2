@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.SceneManagement;
 using TMPro;
 
 public class CheckCollisions : MonoBehaviour
 {
     public int score;
     public TextMeshProUGUI CoinText;
-
-    // Added new codes
     public PlayerController playerController;
+
     Vector3 PlayerStartPos;
+
     public GameObject speedBoosterIcon;
     private InGameRanking ig;
+
+    private Animator playerAnim;
+    public GameObject player;
 
 
     private void Start()
     {
+        playerAnim = GetComponentInChildren<Animator>();
+
         PlayerStartPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         speedBoosterIcon.SetActive(false);
         ig = FindObjectOfType<InGameRanking>();
@@ -28,23 +34,22 @@ public class CheckCollisions : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            //Debug.Log("Coin collected!..");
             AddCoin();
-            //Destroy(other.gameObject);
             other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("End"))
         {
             PlayerFinished();
-            if (ig.namesTxt[6].text == "Player")
+            if (score > 10)
             {
-                Debug.Log("Congrats!..");
+                //Debug.Log("You Win!");
+                playerAnim.SetBool("Win", true);
             }
             else
             {
-                Debug.Log("You Lose!..");
+                //Debug.Log("You Lose..");
+                playerAnim.SetBool("Lose", true);
             }
-
         }
         else if (other.CompareTag("Speedboost"))
         {
@@ -56,6 +61,7 @@ public class CheckCollisions : MonoBehaviour
 
     void PlayerFinished() {
         playerController.runningSpeed = 0f;
+        transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
     }
 
     private void OnCollisionEnter(Collision collision)

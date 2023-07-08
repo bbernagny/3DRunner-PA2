@@ -7,17 +7,6 @@ public class PlayerController : MonoBehaviour
     public float runningSpeed;
     public float xSpeed;
     public float limitx;
-
-    // Added new codes
-    public Animator PlayerAnim;
-    public GameObject Player;
-
-    void Start()
-    {
-        // Added new codes
-        PlayerAnim = Player.GetComponentInChildren<Animator>();
-    }
-
     
     void Update()
     {
@@ -36,6 +25,10 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetMouseButton(0))
         {
             touchXDelta = Input.GetAxis("Mouse X");
+        }
+        else
+        {
+            touchXDelta = 0;
         }
         newX = transform.position.x + xSpeed * touchXDelta * Time.deltaTime;
         newX = Mathf.Clamp(newX, -limitx, limitx);
