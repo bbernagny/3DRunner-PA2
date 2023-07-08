@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class CheckCollisions : MonoBehaviour
@@ -17,6 +17,7 @@ public class CheckCollisions : MonoBehaviour
 
     private Animator playerAnim;
     public GameObject player;
+    public GameObject endPanel;
 
 
     private void Start()
@@ -53,25 +54,27 @@ public class CheckCollisions : MonoBehaviour
         }
         else if (other.CompareTag("Speedboost"))
         {
-            playerController.runningSpeed = playerController.runningSpeed + 3f;
-            speedBoosterIcon.SetActive(true);
             StartCoroutine(SlowAfterAWhileCoroutine());
         }
-    }
-
-    void PlayerFinished() {
-        playerController.runningSpeed = 0f;
-        transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            //Debug.Log("Touched Obstacle!..");
-            // Added new codes
             transform.position = PlayerStartPos;
         }
+    }
+
+    void PlayerFinished() {
+        playerController.runningSpeed = 0f;
+        transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
+        endPanel.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  
     }
 
     public void AddCoin()
@@ -82,7 +85,11 @@ public class CheckCollisions : MonoBehaviour
 
     private IEnumerator SlowAfterAWhileCoroutine()
     {
+        playerController.runningSpeed = playerController.runningSpeed + 3f;
+        speedBoosterIcon.SetActive(true);
+
         yield return new WaitForSeconds(2.0f);
+
         playerController.runningSpeed = playerController.runningSpeed - 3f;
         speedBoosterIcon.SetActive(false);
     }
