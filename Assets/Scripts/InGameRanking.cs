@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class InGameRanking : MonoBehaviour
 {
     public Text[] namesTxt;
-    public string a, b, c, d, e, f, g;
+    public string a, b, c, d, e;
 
     private void Update()
     {
@@ -15,7 +15,5 @@ public class InGameRanking : MonoBehaviour
         namesTxt[2].text = c;
         namesTxt[3].text = d;
         namesTxt[4].text = e;
-        namesTxt[5].text = f;
-        namesTxt[6].text = g;
     }
 }

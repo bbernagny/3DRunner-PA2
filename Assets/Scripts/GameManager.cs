@@ -40,15 +40,11 @@ public class GameManager : MonoBehaviour
         sortArray[2].rank = 3;
         sortArray[3].rank = 4;
         sortArray[4].rank = 5;
-        sortArray[5].rank = 6;
-        sortArray[6].rank = 7;
 
-        ig.a = sortArray[6].name;
-        ig.b = sortArray[5].name;
-        ig.c = sortArray[4].name;
-        ig.d = sortArray[3].name;
-        ig.e = sortArray[2].name;
-        ig.f = sortArray[1].name;
-        ig.g = sortArray[0].name;
+        ig.a = sortArray[4].name;
+        ig.b = sortArray[3].name;
+        ig.c = sortArray[2].name;
+        ig.d = sortArray[1].name;
+        ig.e = sortArray[0].name;
     }
 }

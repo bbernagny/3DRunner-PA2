@@ -8,10 +8,6 @@ public class RankingSystem : MonoBehaviour
     public GameObject target;
     public int rank;
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

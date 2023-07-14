@@ -15,7 +15,7 @@ public class CheckCollisions : MonoBehaviour
     public GameObject speedBoosterIcon;
     private InGameRanking ig;
 
-    private Animator playerAnim;
+    public Animator playerAnim;
     public GameObject player;
     public GameObject endPanel;
 
