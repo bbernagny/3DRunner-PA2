@@ -27,6 +27,11 @@ public class Opponent : MonoBehaviour
     void Update()
     {
         OpponentAgent.SetDestination(Target.transform.position);
+
+        if (GameManager.instance.isGameOver)
+        {
+            OpponentAgent.Stop();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

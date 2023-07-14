@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private GameObject[] runner;
     List<RankingSystem> sortArray= new List<RankingSystem>();
 
+    public bool isGameOver = false;
+
     private void Awake()
     {
         instance = this;

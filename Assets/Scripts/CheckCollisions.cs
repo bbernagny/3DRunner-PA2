@@ -70,6 +70,7 @@ public class CheckCollisions : MonoBehaviour
         playerController.runningSpeed = 0f;
         transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
         endPanel.SetActive(true);
+        GameManager.instance.isGameOver = true;
     }
 
     public void RestartGame()
