@@ -6,7 +6,11 @@ using UnityEngine.AI;
 public class Opponent : MonoBehaviour
 {
     public NavMeshAgent OpponentAgent;
+    public PlayerController playerController;
+    public CheckCollisions checkCollisions;
     public GameObject Target;
+    public GameObject endPanel;
+    public GameObject YouLose;
 
     Vector3 OpponentStartPos;
     public GameObject speedBoosterIcon;
@@ -41,6 +45,11 @@ public class Opponent : MonoBehaviour
             speedBoosterIcon.SetActive(true);
             StartCoroutine(SlowAfterAWhileCoroutine());
         }
+
+        if (other.CompareTag("End"))
+        {
+            OpponentFinished();
+        }
     }
     private IEnumerator SlowAfterAWhileCoroutine() {
         yield return new WaitForSeconds(2.0f);
@@ -48,4 +57,13 @@ public class Opponent : MonoBehaviour
         speedBoosterIcon.SetActive(false);
     }
 
+    private void OpponentFinished()
+    {
+        OpponentAgent.speed = 0;
+        transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
+        playerController.runningSpeed = 0;
+        endPanel.SetActive(true);
+        YouLose.SetActive(true);
+        checkCollisions.playerAnim.SetBool("Lose", true);
+    }
 }
